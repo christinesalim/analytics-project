@@ -1,0 +1,30 @@
+#these are the overrides to the default docker compose
+x-airflow-common:
+  &airflow-common
+  environment:
+    &airflow-common-environment
+    AIRFLOW__CORE__LOAD_EXAMPLES: 'false'
+    AIRFLOW__WEBSERVER__ENABLE_PROXY_FIX: 'true'
+    AIRFLOW__WEBSERVER__PROXY_FIX_X_FOR: 1
+    AIRFLOW__WEBSERVER__PROXY_FIX_X_PROTO: 1
+    AIRFLOW__WEBSERVER__PROXY_FIX_X_HOST: 1
+    AIRFLOW__WEBSERVER__PROXY_FIX_X_PORT: 1
+    AIRFLOW__WEBSERVER__PROXY_FIX_X_PREFIX: 1
+
+
+services:docker compose exec airflow-webserver airflow version
+
+  airflow-webserver:
+    <<: *airflow-common
+    command: webserver
+    ports:
+      - "8080:8080"
+    environment:
+      <<: *airflow-common-environment
+
+  airflow-scheduler:
+    <<: *airflow-common
+    command: scheduler
+    environment:
+      <<: *airflow-common-environment
+      AIRFLOW__SCHEDULER__MIN_FILE_PROCESS_INTERVAL: '30'
