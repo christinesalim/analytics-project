@@ -10,6 +10,7 @@ x-airflow-common:
     AIRFLOW__WEBSERVER__PROXY_FIX_X_HOST: 1
     AIRFLOW__WEBSERVER__PROXY_FIX_X_PORT: 1
     AIRFLOW__WEBSERVER__PROXY_FIX_X_PREFIX: 1
+    AIRFLOW__CORE__FERNET_KEY: i00WTK3ODbzOo5R8ZclaUk54wl_9v6JTaBuyC8TJaJk=
 
 
 services:docker compose exec airflow-webserver airflow version
